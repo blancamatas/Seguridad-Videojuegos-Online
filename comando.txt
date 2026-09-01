@@ -1,0 +1,3 @@
+curl -X POST http://192.168.56.10:3000/api/news/update \
+     -H "Content-Type: application/json" \
+     -d @ataque_1.json
