@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PoC</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-bg"></div>
+  <div class="app-overlay"></div>
+
+  <header class="top-nav">
+    <div class="top-nav-left">
+      <button class="top-link active" data-view="inicio">JUGAR</button>
+      <button class="top-link locked" data-view="inventario">INVENTARIO</button>
+      <button class="top-link locked" data-view="tienda">TIENDA</button>
+      <button class="top-link" data-view="perfil">PERFIL</button>
+      <button class="top-link locked" data-view="centro">CENTRO</button>
+    </div>
+
+    <div class="top-nav-right">
+      <div class="currency-box">
+        <span class="currency-dot gold"></span>
+        <span id="coinsValue">0</span>
+      </div>
+      <div class="currency-box">
+        <span class="currency-dot silver"></span>
+        <span id="creditsValue">100</span>
+      </div>
+      <div class="level-box">
+        <span id="levelValue">17</span>
+        <span>NVL.</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <section id="view-inicio" class="view hidden">
+      <div class="hero-panel">
+        <div class="hero-left panel-cyan">
+          <div class="hero-kicker">Cliente web</div>
+          <h1>Lobby</h1>
+          <p id="statusText" class="hidden"></p>
+        </div>
+
+        <div class="hero-right compact-actions panel-cyan">
+          <button id="reloadBtn" class="hidden">RECARGAR</button>
+          <button class="play-btn">JUGAR</button>
+        </div>
+      </div>
+
+      <div id="renderModeDock" class="render-mode-dock">
+        <div class="render-dock-title">Renderizado</div>
+        <span id="modeBadge" class="mode-badge vulnerable">Vulnerable</span>
+        <button id="vulnerableBtn">Vulnerable</button>
+        <button id="safeBtn">Corregido</button>
+      </div>
+
+      <div id="loginPromptCard" class="panel login-prompt visible">
+        <h2>Acceso requerido</h2>
+        <p>
+          Debes iniciar sesión desde la pestaña <strong>PERFIL</strong> para acceder al cliente.
+        </p>
+      </div>
+
+      <div id="homeContent" class="hidden">
+        <div id="homeSystemMessage" class="hidden"></div>
+
+        <div class="home-grid">
+          
+          <article class="panel panel-purple">
+            <h2>Jugador</h2>
+            <div class="player-name" id="homeDisplayName">-</div>
+            <div class="meta-line">
+              <span id="homeUsername">-</span>
+              <span>·</span>
+              <span id="homeRegion">-</span>
+              <span>·</span>
+              <span id="homeRole">-</span>
+            </div>
+          </article>
+
+          <article class="panel panel-noticias">
+            <h2>Noticias destacadas</h2>
+            <div id="homeNewsNotice" class="rendered-box">-</div>
+          </article>
+
+          <article class="panel panel-purple">
+            <h2>Sala</h2>
+            <div class="room-name" id="homeRoomName">-</div>
+            <div class="meta-line">
+              <span id="homePublicAddress">-</span>
+              <span>·</span>
+              <span id="homePlayersOnline">-</span>
+              <span> jugadores</span>
+            </div>
+          </article>
+          
+        </div>
+      </div>
+    </section>
+
+    <section id="view-perfil" class="view hidden">
+      <div id="loginPanel" class="panel visible login-panel">
+        <h2>Iniciar sesión</h2>
+        <p class="panel-subtitle">Accede con una cuenta registrada para desbloquear el resto del cliente.</p>
+
+        <label for="usernameInput">Usuario</label>
+        <input id="usernameInput" type="text" value="android888" />
+
+        <label for="passwordInput">Contraseña</label>
+        <input id="passwordInput" type="password" value="demo123" />
+
+        <div class="mode-buttons" style="margin-top: 10px;">
+          <button id="loginBtn" class="primary-btn" style="flex: 1;">INICIAR SESIÓN</button>
+          <button id="registerBtn" class="secondary-btn">REGISTRARSE</button>
+        </div>
+
+        <p id="loginMessage" class="login-message">Sesión no iniciada.</p>
+      </div>
+
+      <div id="profilePanel" class="panel hidden">
+        <h2>Perfil del jugador</h2>
+        <div class="field-row"><span class="field-label">Usuario</span><span id="profileUsername">-</span></div>
+        <div class="field-row"><span class="field-label">Nombre visible</span><span id="profileName">-</span></div>
+        <div class="field-row"><span class="field-label">Rol</span><span id="profileRole">-</span></div>
+        <div class="field-row"><span class="field-label">Región</span><span id="profileRegion">-</span></div>
+        <div class="field-row"><span class="field-label">Nivel</span><span id="profileLevel">-</span></div>
+        
+        <button id="logoutBtn" class="secondary-btn" style="width: 100%; margin-top: 24px; border: 1px solid rgba(255, 50, 80, 0.4); color: #ff3250;">
+          CERRAR SESIÓN
+        </button>
+      </div>
+    </section>
+
+    <section id="view-centro" class="view hidden">
+      <div id="centerLocked" class="panel visible">
+        <h2>Acceso restringido</h2>
+        <p>Debes iniciar sesión para acceder al centro del juego.</p>
+      </div>
+
+      <div id="centerContent" class="hidden">
+        <div class="grid-two">
+          <article class="panel">
+            <h2>Lobby</h2>
+            <div class="field-row"><span class="field-label">Sala</span><span id="lobbyRoomName">-</span></div>
+            <div class="field-row"><span class="field-label">Dirección pública</span><span id="lobbyAddress">-</span></div>
+            <div class="field-row"><span class="field-label">Jugadores conectados</span><span id="lobbyPlayersOnline">-</span></div>
+          </article>
+
+          <article class="panel">
+            <h2>Noticias</h2>
+            <div class="field-row"><span class="field-label">Título</span><span id="newsTitle">-</span></div>
+            <div class="field-row stacked"><span class="field-label">Aviso</span><div id="newsNotice" class="rendered-box">-</div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
